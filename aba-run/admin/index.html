@@ -54,7 +54,7 @@ label{display:block;font-weight:800;font-size:12px;margin:12px 0 5px}input,texta
 <div id="modal" class="modal hidden"></div>
 
 <script>
-const URL="https://uhznenjxhdosesgvylts.supabase.co",KEY="sb_publishable_Sn9p8Ew7YaBsige4O-aZSA_21gUZJY-",API=URL+"/functions/v1/aba-run-api";
+const URL="https://uhznenjxhdosesgvylts.supabase.co",KEY="sb_publishable_Sn9p8Ew7YaBsige4O-aZSA_21gUZJY-",API="/api";
 const sb=window.supabase.createClient(URL,KEY),$=id=>document.getElementById(id);let dash=null,current="overview";
 const esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 function message(t,ok=false){$("msg").textContent=t;$("msg").className="msg "+(ok?"ok":"err")}
