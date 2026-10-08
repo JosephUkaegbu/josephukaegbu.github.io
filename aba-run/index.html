@@ -60,9 +60,68 @@ if(z===2){sign(25,105,150,36,'ABA MAIN PARK','#08783f');stall(5,250,105,'TICKETS
 if(z===3){sign(15,110,145,34,'FAULKS ROAD','#08783f');stall(7,250,105,'TAILOR','#f7b928');stall(W-125,235,110,'COBBLER','#d73535');sign(W-205,165,125,30,'ABA MADE','#08783f')}
 if(z===4){sign(20,110,155,36,'OSISIOMA JUNCTION','#08783f');stall(8,250,105,'SPARES','#d73535');stall(W-125,245,110,'SHOE PLAZA','#f7b928');sign(W-190,165,135,30,'ABIA • ABA','#08783f')}
 ctx.fillStyle='#111';ctx.fillRect(0,H*.62,W,8);ctx.fillStyle='#fff';for(let i=0;i<9;i++){let x=(i*130-shift);ctx.fillRect(x,H*.61,70,4)}ctx.restore()}
-function drawKeke(x,y,scale=1,col='#08783f'){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.shadowColor='#0008';ctx.shadowBlur=13;ctx.fillStyle='#111';ctx.fillRect(-35,-48,70,96);ctx.fillStyle=col;ctx.fillRect(-31,-43,62,82);ctx.fillStyle='#222';ctx.fillRect(-26,-34,52,22);ctx.fillStyle='#b9dce4';ctx.fillRect(-22,-30,44,15);ctx.fillStyle='#f7b928';ctx.fillRect(-31,1,62,8);ctx.fillStyle='#fff';ctx.font='900 9px system-ui';ctx.textAlign='center';ctx.fillText('ABA',0,27);ctx.fillStyle='#111';ctx.fillRect(-37,30,9,18);ctx.fillRect(28,30,9,18);ctx.restore()}
+function wheel(x,y,r=8,spin=0){
+  ctx.save();ctx.translate(x,y);ctx.rotate(spin);
+  ctx.fillStyle='#111';ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#777';ctx.beginPath();ctx.arc(0,0,r*.52,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#bbb';ctx.lineWidth=1;for(let i=0;i<6;i++){let a=i*Math.PI/3;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(a)*r*.45,Math.sin(a)*r*.45);ctx.stroke()}
+  ctx.restore();
+}
+function drawKeke(x,y,scale=1,col='#08783f'){
+  ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);
+  const spin=offset*.09;
+  ctx.shadowColor='#0009';ctx.shadowBlur=14;
+  // rear canopy / frame
+  ctx.fillStyle='#151918';ctx.beginPath();ctx.roundRect(-39,-54,78,99,12);ctx.fill();
+  ctx.fillStyle=col;ctx.beginPath();ctx.roundRect(-36,-51,72,94,11);ctx.fill();
+  // black canopy roof
+  ctx.fillStyle='#101313';ctx.beginPath();ctx.roundRect(-40,-58,80,18,8);ctx.fill();
+  // front windscreen
+  ctx.fillStyle='#9fc9d0';ctx.beginPath();ctx.roundRect(-27,-38,54,23,4);ctx.fill();
+  ctx.strokeStyle='#1a2522';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,-38);ctx.lineTo(0,-15);ctx.stroke();
+  // side openings
+  ctx.fillStyle='#26332f';ctx.fillRect(-32,-11,64,31);
+  ctx.strokeStyle='#111';ctx.lineWidth=3;
+  for(let i=-25;i<=25;i+=12){ctx.beginPath();ctx.moveTo(i,-11);ctx.lineTo(i,20);ctx.stroke()}
+  // yellow waist stripe
+  ctx.fillStyle='#f7b928';ctx.fillRect(-36,19,72,8);
+  // bumper, headlamps and plate
+  ctx.fillStyle='#202624';ctx.fillRect(-34,27,68,12);
+  ctx.fillStyle='#fff2b0';ctx.fillRect(-29,27,9,6);ctx.fillRect(20,27,9,6);
+  ctx.fillStyle='#111';ctx.fillRect(-11,30,22,6);
+  ctx.fillStyle='#f7b928';ctx.font='900 7px system-ui';ctx.textAlign='center';ctx.fillText('ABA',0,35);
+  // wheels
+  wheel(-39,31,10,spin);wheel(39,31,10,-spin);
+  // mirrors
+  ctx.strokeStyle='#111';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-34,-31);ctx.lineTo(-47,-40);ctx.moveTo(34,-31);ctx.lineTo(47,-40);ctx.stroke();
+  ctx.fillStyle='#222';ctx.beginPath();ctx.arc(-49,-41,5,0,7);ctx.arc(49,-41,5,0,7);ctx.fill();
+  ctx.restore();
+}
 function drawCar(x,y,scale=1,col='#d73535',label='TAXI'){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.fillStyle='#151818';ctx.beginPath();ctx.roundRect(-27,-45,54,90,11);ctx.fill();ctx.fillStyle=col;ctx.beginPath();ctx.roundRect(-25,-43,50,86,10);ctx.fill();ctx.fillStyle='#a9d8e5';ctx.fillRect(-17,-28,34,21);ctx.fillStyle='#f7b928';ctx.fillRect(-20,7,40,10);ctx.fillStyle='#fff';ctx.font='900 8px system-ui';ctx.textAlign='center';ctx.fillText(label,0,2);ctx.restore()}
-function drawBus(x,y,scale=1){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.fillStyle='#1d2923';ctx.fillRect(-31,-58,62,116);ctx.fillStyle='#e6e0d1';ctx.fillRect(-27,-53,54,101);ctx.fillStyle='#08783f';ctx.fillRect(-27,-7,54,17);ctx.fillStyle='#a9d8e5';for(let i=-20;i<=10;i+=15)ctx.fillRect(i,-43,11,24);ctx.fillStyle='#fff';ctx.font='900 7px system-ui';ctx.textAlign='center';ctx.fillText('ABA BUS',0,29);ctx.restore()}
+function drawBus(x,y,scale=1){
+  ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);
+  const spin=offset*.07;
+  ctx.shadowColor='#0009';ctx.shadowBlur=15;
+  // tall Nigerian city bus silhouette
+  ctx.fillStyle='#111817';ctx.beginPath();ctx.roundRect(-38,-70,76,140,13);ctx.fill();
+  ctx.fillStyle='#e8dfca';ctx.beginPath();ctx.roundRect(-34,-67,68,134,11);ctx.fill();
+  // green lower body
+  ctx.fillStyle='#08783f';ctx.fillRect(-34,18,68,49);
+  ctx.fillStyle='#f7b928';ctx.fillRect(-34,12,68,8);
+  // windows
+  ctx.fillStyle='#263f43';ctx.fillRect(-28,-58,56,62);
+  ctx.strokeStyle='#111';ctx.lineWidth=3;
+  for(let i=-16;i<=16;i+=16){ctx.beginPath();ctx.moveTo(i,-58);ctx.lineTo(i,4);ctx.stroke()}
+  // front destination board
+  ctx.fillStyle='#111';ctx.fillRect(-25,-65,50,10);
+  ctx.fillStyle='#f7b928';ctx.font='900 6px system-ui';ctx.textAlign='center';ctx.fillText('ABA • MAIN PARK',0,-58);
+  // headlights and grille
+  ctx.fillStyle='#fff2b0';ctx.fillRect(-27,42,11,7);ctx.fillRect(16,42,11,7);
+  ctx.fillStyle='#202624';ctx.fillRect(-21,52,42,5);
+  ctx.fillStyle='#fff';ctx.font='900 8px system-ui';ctx.fillText('ABA BUS',0,32);
+  wheel(-40,47,11,spin);wheel(40,47,11,-spin);
+  ctx.restore();
+}
 function drawBike(x,y,scale=1){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.strokeStyle='#111';ctx.lineWidth=5;ctx.beginPath();ctx.arc(-12,18,10,0,7);ctx.arc(14,18,10,0,7);ctx.stroke();ctx.strokeStyle='#d73535';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(-12,18);ctx.lineTo(-2,-3);ctx.lineTo(14,18);ctx.lineTo(4,18);ctx.lineTo(-2,-3);ctx.stroke();ctx.fillStyle='#222';ctx.fillRect(-3,-20,6,17);ctx.restore()}
 function drawPolice(x,y,scale=1){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.fillStyle='#f5f1e8';ctx.fillRect(-25,-38,50,76);ctx.fillStyle='#123d6b';ctx.fillRect(-25,-2,50,16);ctx.fillStyle='#e33';ctx.fillRect(-10,-44,8,6);ctx.fillStyle='#39f';ctx.fillRect(2,-44,8,6);ctx.fillStyle='#fff';ctx.font='900 7px system-ui';ctx.textAlign='center';ctx.fillText('POLICE',0,7);ctx.restore()}
 function pothole(x,y,s=1){ctx.fillStyle='#111';ctx.beginPath();ctx.ellipse(x,y,22*s,10*s,0,0,7);ctx.fill();ctx.fillStyle='#555';ctx.beginPath();ctx.ellipse(x-5*s,y-2*s,11*s,4*s,0,0,7);ctx.fill()}
