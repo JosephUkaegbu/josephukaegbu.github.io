@@ -36,7 +36,7 @@ async function loadBackendContent(){
  if(!API_BASE)return;
  try{
   const stations=await fetch(API_BASE+'/api/radio/stations').then(r=>r.ok?r.json():[]);
-  if(Array.isArray(stations)&&stations.length)radioStations.splice(0,radioStations.length,...stations.map(s=>({name:s.name,freq:s.frequency,url:s.streamUrl||'',website:s.website_url||''})));
+  if(Array.isArray(stations)&&stations.length)radioStations.splice(0,radioStations.length,...stations.map(s=>({name:s.name,freq:s.frequency,url:s.stream_url||'',website:s.website_url||''})));
  }catch(e){console.warn('ABA RUN API unavailable; using local radio fallback',e)}
 }
 async function submitRun(){if(!API_BASE)return;try{const name=localStorage.abaRunPlayer||'Anonymous';let pid=localStorage.abaRunPlayerId;if(!pid){const p=await fetch(API_BASE+'/api/players',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({displayName:name})}).then(r=>r.ok?r.json():null);pid=p?.id||null;if(pid)localStorage.abaRunPlayerId=pid}await fetch(API_BASE+'/api/runs',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({playerId:pid,score:Math.floor(score),cash:Math.floor(cash),distance:Math.floor(travel*1000),zone:zones[zone]?.[0],vehicle:'keke'})})}catch(e){console.warn('Could not save run',e)}}
